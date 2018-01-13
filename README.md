@@ -50,5 +50,62 @@ void loop() {
   delay(150);
 }
 ```
+## Random Input
+```
+#include <Stepper.h>
 
+const int stepsPerRevolution = 400;  // change this to fit the number of steps per revolution
+// for your motor
+
+// initialize the stepper library on pins 8 through 11:
+Stepper myStepper1(stepsPerRevolution, 8, 9, 10, 3);
+Stepper myStepper2(stepsPerRevolution, 11, 12, 13, 4);
+
+int stepCount = 0;
+
+void setup() {
+  // set the speed at 3000 rpm:
+  myStepper1.setSpeed(3000);
+  myStepper2.setSpeed(3000);
+
+  // initialize the serial port:
+  Serial.begin(250000);
+}
+
+void loop() {
+  // read the sensor value:
+  int sensorReading = analogRead(A0);
+
+  sensorReading = random(0,1023);
+  int motorDirection = random(-1,1);
+  // map it to a range from 0 to 100:
+  int motorSpeed = map(sensorReading, 0, 1023, 0, 3000);
+  // set the motor speed:
+
+  if (motorSpeed > 0) {
+    myStepper1.setSpeed(motorSpeed);
+    // step 1/100 of a revolution:
+    myStepper1.step(stepsPerRevolution / 100);
+    if(motorDirection>0){
+      // step one revolution  in one direction:
+      Serial.println("clockwise");
+      //myStepper1.setSpeed(1000);
+      myStepper1.step(stepsPerRevolution);
+    }else{
+      // step one revolution  in one direction:
+      Serial.println("counter clockwise");
+      //myStepper1.setSpeed(1000);
+      myStepper1.step(-1*stepsPerRevolution);
+    }
+  }
+
+  
+  // step one revolution  in one direction:
+  Serial.println("clockwise");
+  //myStepper1.setSpeed(1000);
+  myStepper1.step(stepsPerRevolution);
+  myStepper2.step(stepsPerRevolution);
+  
+}
+```
 
