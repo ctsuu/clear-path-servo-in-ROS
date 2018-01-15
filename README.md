@@ -126,7 +126,7 @@ For some reason, the PORT assignment does not working. Therefore, I change back 
 #define STEP_HIGH        PORTF |=  0b00000001;
 #define STEP_LOW         PORTF &= ~0b00000001;
 ```
-
+```
 digitalWrite(STEP_PIN, HIGH);
 digitalWrite(STEP_PIN, LOW);
 //STEP_HIGH
