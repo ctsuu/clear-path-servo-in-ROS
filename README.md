@@ -108,4 +108,18 @@ void loop() {
   
 }
 ```
+## Simple Arduino driver code
+Refer to the following link.
+https://www.youtube.com/watch?v=fHAO7SW-SZI
+
+According to Clear path driver, the enable pin is enabled at HIGH. 
+```
+digitalWrite(ENABLE_PIN, HIGH);
+```
+
+
+
+
+
+
 
